@@ -21,3 +21,9 @@ export const removeGitHubTokenHeader = () => {
     delete openHands.defaults.headers.common["X-GitHub-Token"];
   }
 };
+
+const CLIENT_AUTH = import.meta.env.VITE_CLIENT_AUTH === "True";
+if (CLIENT_AUTH) {
+  const CLIENT_JWT = import.meta.env.VITE_CLIENT_JWT;
+  setAuthTokenHeader(CLIENT_JWT);
+}

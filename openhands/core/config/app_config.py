@@ -40,6 +40,7 @@ class AppConfig(BaseModel):
         max_budget_per_task: Maximum budget per task, agent stops if exceeded.
         e2b_api_key: E2B API key.
         disable_color: Whether to disable terminal colors. For terminals that don't support color.
+        client_auth: Whether to authenticate API/socket client.
         debug: Whether to enable debugging mode.
         file_uploads_max_file_size_mb: Maximum file upload size in MB. `0` means unlimited.
         file_uploads_restrict_file_types: Whether to restrict upload file types.
@@ -72,6 +73,8 @@ class AppConfig(BaseModel):
     modal_api_token_secret: SecretStr | None = Field(default=None)
     disable_color: bool = Field(default=False)
     jwt_secret: SecretStr | None = Field(default=None)
+    client_auth: bool = Field(default=False)
+    jwt_secret_client_auth: SecretStr | None = Field(default=None)
     debug: bool = Field(default=False)
     file_uploads_max_file_size_mb: int = Field(default=0)
     file_uploads_restrict_file_types: bool = Field(default=False)

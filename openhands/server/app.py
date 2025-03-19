@@ -6,6 +6,7 @@ with warnings.catch_warnings():
 
 from fastapi import (
     FastAPI,
+    Depends,
 )
 
 import openhands.agenthub  # noqa F401 (we import this to get the agents registered)
@@ -21,7 +22,8 @@ from openhands.server.routes.public import app as public_api_router
 from openhands.server.routes.security import app as security_api_router
 from openhands.server.routes.settings import app as settings_router
 from openhands.server.routes.trajectory import app as trajectory_router
-from openhands.server.shared import conversation_manager
+from openhands.server.shared import conversation_manager, config
+from openhands.server.auth import verify_token_api
 
 
 @asynccontextmanager
@@ -29,12 +31,16 @@ async def _lifespan(app: FastAPI):
     async with conversation_manager:
         yield
 
+dependencies = []
+if config.client_auth == True:
+    dependencies.append(Depends(verify_token_api))
 
 app = FastAPI(
     title='OpenHands',
     description='OpenHands: Code Less, Make More',
     version=__version__,
     lifespan=_lifespan,
+    dependencies=dependencies,
 )
 
 

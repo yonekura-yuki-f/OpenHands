@@ -43,6 +43,8 @@ websocat ws://127.0.0.1:3000/ws
 LLM_API_KEY=sk-... # Your Anthropic API Key
 LLM_MODEL=claude-3-5-sonnet-20241022 # Default model for the agent to use
 WORKSPACE_BASE=/path/to/your/workspace # Default absolute path to workspace
+CLIENT_AUTH=True # Specify True if you want to authenticate using JWT token
+JWT_SECRET_CLIENT_AUTH=jwt-secret-for-client-auth # jwt secret for authentication(Specify True for CLIENT_AUTH)
 ```
 
 ## API Schema

@@ -89,6 +89,12 @@ workspace_base = "./workspace"
 # JWT secret for authentication
 #jwt_secret = ""
 
+# Whether to authenticate API/socket client
+#client_auth = true
+
+# jwt secret for authentication(Specify True for CLIENT_AUTH)
+#jwt_secret_client_auth = jwt-secret-for-client-auth
+
 # Restrict file types for file uploads
 #file_uploads_restrict_file_types = false
 

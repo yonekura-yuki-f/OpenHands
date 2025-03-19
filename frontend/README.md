@@ -74,8 +74,22 @@ npm start -- --port 3001
 ```
 
 ### Environment Variables
+#### Using client_auth mode
+If Openhands server is runnning in client_auth mode(CLIENT_AUTH=True), Frontend needs to be started specifying below environment variables.
+```sh
+VITE_CLIENT_AUTH=True # Specify True if you want to authenticate using JWT token
+VITE_CLIENT_JWT=your-jwt
+```
 
-TODO
+Example of jwt
+```python
+import jwt
+payload = {'user_id': 'some-user-id(any string)'}
+secret = 'secret-key-for-agent-auth(specified in JWT_SECRET_CLIENT_AUTH parameter in Openhands server)'
+token = jwt.encode(payload, secret, algorithm='HS256')
+```
+
+
 
 ### Project Structure
 

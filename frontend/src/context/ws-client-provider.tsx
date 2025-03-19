@@ -173,9 +173,17 @@ export function WsClientProvider({
     const baseUrl =
       import.meta.env.VITE_BACKEND_BASE_URL || window?.location.host;
 
+    let auth = {};
+    const CLIENT_AUTH = import.meta.env.VITE_CLIENT_AUTH === "True";
+    if (CLIENT_AUTH) {
+      const CLIENT_JWT = import.meta.env.VITE_CLIENT_JWT;
+      auth = { token: `Bearer ${CLIENT_JWT}` };
+    }
+
     sio = io(baseUrl, {
       transports: ["websocket"],
       query,
+      auth,
     });
     sio.on("connect", handleConnect);
     sio.on("oh_event", handleMessage);
